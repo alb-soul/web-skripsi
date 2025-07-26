@@ -9,6 +9,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: `
               default-src 'self';
+              script-src 'self';
+              style-src 'self' 'unsafe-inline';
+              img-src 'self' data:;
+              object-src 'none';
+              base-uri 'self';
+              form-action 'self'
             `.replace(/\s{2,}/g, ' ').trim()
           },
           {
