@@ -1,19 +1,53 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Tidak menambahkan header keamanan
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
           {
+            key: 'Content-Security-Policy',
+            value: `
+              default-src 'self';
+              script-src 'self' 'unsafe-inline';
+              style-src 'self' 'unsafe-inline';
+              img-src 'self' data:;
+              connect-src 'self';
+              font-src 'self';
+              frame-ancestors 'none';
+            `.replace(/\s{2,}/g, ' ').trim()
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          },
+          {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: 'https://web-skripsi-six.vercel.app' // Ganti jika perlu
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type'
           }
-          // Tidak menambahkan X-Frame-Options dan CSP di sini
         ]
       }
-    ];
+    ]
   }
 };
 
