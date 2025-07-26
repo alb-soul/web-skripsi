@@ -10,7 +10,7 @@ const nextConfig = {
             value: `
               default-src 'self';
               script-src 'self';
-              style-src 'self' 'unsafe-inline';
+              style-src 'self';
               img-src 'self' data:;
               object-src 'none';
               base-uri 'self';
